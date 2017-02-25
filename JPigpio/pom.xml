@@ -42,7 +42,6 @@
 
 					<javahOutputDirectory>${native.javahOutput}</javahOutputDirectory>
 
-
 					<javahIncludes>
 						<javahInclude>
 							<className>jpigpio.Pigpio</className>
@@ -62,9 +61,16 @@
 					</execution>
 				</executions>
 
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+					<outputDirectory>${project.parent.build.directory}</outputDirectory>
+				</configuration>
 
 			</plugin>
-
 		</plugins>
 	</build>
 </project>
