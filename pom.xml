@@ -23,7 +23,7 @@
 		<license.licenseName>apache_v2</license.licenseName>
 		<license.organizationName>Christian Fischer</license.organizationName>
 		<license.inceptionYear>2017</license.inceptionYear>
-		<native.javahOutput>${project.parent.build.directory}/native/javah</native.javahOutput>
+		<native.javahOutput>${project.parent.build.directory}</native.javahOutput>
 	</properties>
 
 	<dependencyManagement>

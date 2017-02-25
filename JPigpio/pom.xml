@@ -33,7 +33,6 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<outputDirectory>${project.parent.build.directory}</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
