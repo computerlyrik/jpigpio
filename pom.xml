@@ -77,14 +77,14 @@
 				<executions>
 					<execution>
 						<id>javah</id>
-						<phase>generate-resources</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>javah</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>build</id>
-						<phase>compile</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>compile</goal>
 						</goals>
