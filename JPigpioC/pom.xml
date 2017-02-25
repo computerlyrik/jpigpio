@@ -46,7 +46,7 @@
 						<linkerEndOption>-lpigpio -lpthread -lrt</linkerEndOption>
 					</linkerStartOptions>
 
-					<linkerFinalName>libJPigpioC.so</linkerFinalName>
+					<linkerFinalName>libJPigpioC</linkerFinalName>
 					<linkerOutputDirectory>${project.parent.build.directory}</linkerOutputDirectory>
 
 				</configuration>
