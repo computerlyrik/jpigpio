@@ -3,11 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-
-
-	<groupId>de.computerlyrik</groupId>
 	<artifactId>JPiGpio</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 
 	<parent>
 		<groupId>de.computerlyrik</groupId>
@@ -22,12 +18,10 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4jVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4jVersion}</version>
 		</dependency>
 	</dependencies>
 
