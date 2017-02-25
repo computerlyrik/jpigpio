@@ -76,17 +76,17 @@
 
 				<executions>
 					<execution>
-						<id>compile</id>
-						<phase>compile</phase>
+						<id>javah</id>
+						<phase>generate-resources</phase>
 						<goals>
-							<goal>compile</goal>
+							<goal>javah</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>javah</id>
-						<phase>package</phase>
+						<id>build</id>
+						<phase>compile</phase>
 						<goals>
-							<goal>javah</goal>
+							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>
