@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<groupId>de.computerlyrik</groupId>
+	<artifactId>JPiGpio-binding</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<parent>
+		<groupId>de.computerlyrik</groupId>
+		<artifactId>JPiGpio-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<name>JPiGpio C Project</name>
+	<packaging>so</packaging>
+
+
+	<build>
+		<outputDirectory>${project.parent.build.directory}</outputDirectory>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+				<version>1.0-alpha-8</version>
+
+				<extensions>true</extensions>
+				<configuration>
+
+					<sources>
+						<source>
+							<directory>.</directory>
+							<includes>
+								<include>*.c</include>
+							</includes>
+						</source>
+					</sources>
+
+					<compilerStartOptions>
+						<compilerStartOption>-c -Wall -fPIC -I ${native.javahOutput} -I ${JAVA_HOME}/include -I ${JAVA_HOME}/include/linux</compilerStartOption>
+					</compilerStartOptions>
+
+					<linkerStartOptions>
+						<linkerStartOption>-shared -Wl,-soname,libJPigpioC.so</linkerStartOption>
+						<linkerEndOption>-lpigpio -lpthread -lrt</linkerEndOption>
+					</linkerStartOptions>
+
+
+
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>build</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+
+
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

@@ -6,11 +6,15 @@
 
 
 	<groupId>de.computerlyrik</groupId>
-	<artifactId>jpigpio</artifactId>
+	<artifactId>JPiGpio-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>JPiGpio Maven packaging</name>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>JPigpio</module>
+		<module>JPigpioC</module>
+	</modules>
 
 	<properties>
 		<slf4jVersion>1.7.22</slf4jVersion>
@@ -19,83 +23,34 @@
 		<license.licenseName>apache_v2</license.licenseName>
 		<license.organizationName>Christian Fischer</license.organizationName>
 		<license.inceptionYear>2017</license.inceptionYear>
+		<native.javahOutput>${project.parent.build.directory}/native/javah</native.javahOutput>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4jVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4jVersion}</version>
-		</dependency>
-	</dependencies>
-
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4jVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4jVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
-		<sourceDirectory>JPigpio/src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native-maven-plugin</artifactId>
-				<version>1.0-alpha-8</version>
-
-				<extensions>true</extensions>
-				<configuration>
-
-					<sources>
-						<source>
-							<directory>JPigpioC</directory>
-							<includes>
-								<include>*.c</include>
-							</includes>
-						</source>
-					</sources>
-
-					<compilerStartOptions>
-						<compilerStartOption>-c -Wall -fPIC -I ${JAVA_HOME}/include -I ${JAVA_HOME}/include/linux</compilerStartOption>
-					</compilerStartOptions>
-
-					<linkerStartOptions>
-						<linkerStartOption>-lpigpio -lpthread -lrt</linkerStartOption>
-					</linkerStartOptions>
-
-
-					<javahIncludes>
-						<javahInclude>
-							<className>jpigpio.Pigpio</className>
-							<headerName>jpigpio_Pigpio.h</headerName>
-						</javahInclude>
-					</javahIncludes>
-
-				</configuration>
-
-				<executions>
-					<execution>
-						<id>javah</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>javah</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>build</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-
-
-			</plugin>
-
-
-
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>native-maven-plugin</artifactId>
+					<version>1.0-alpha-8</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
+
 </project>
