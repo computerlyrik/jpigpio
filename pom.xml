@@ -57,7 +57,7 @@
 					</sources>
 
 					<compilerStartOptions>
-						<compilerStartOption>-c -Wall -fPIC -I $(JAVA_HOME)/include -I $(JAVA_HOME)/include/linux</compilerStartOption>
+						<compilerStartOption>-c -Wall -fPIC -I ${JAVA_HOME}/include -I ${JAVA_HOME}/include/linux</compilerStartOption>
 					</compilerStartOptions>
 
 					<linkerStartOptions>
