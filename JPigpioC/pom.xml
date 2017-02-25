@@ -20,17 +20,14 @@
 
 
 	<build>
-		<outputDirectory>${project.parent.build.directory}</outputDirectory>
-
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native-maven-plugin</artifactId>
-				<version>1.0-alpha-8</version>
-
 				<extensions>true</extensions>
+				
 				<configuration>
-
+				
 					<sources>
 						<source>
 							<directory>.</directory>
@@ -43,13 +40,14 @@
 					<compilerStartOptions>
 						<compilerStartOption>-c -Wall -fPIC -I ${native.javahOutput} -I ${JAVA_HOME}/include -I ${JAVA_HOME}/include/linux</compilerStartOption>
 					</compilerStartOptions>
-
+					
 					<linkerStartOptions>
 						<linkerStartOption>-shared -Wl,-soname,libJPigpioC.so</linkerStartOption>
 						<linkerEndOption>-lpigpio -lpthread -lrt</linkerEndOption>
 					</linkerStartOptions>
 
-
+					<linkerFinalName>libJPigpioC.so</linkerFinalName>
+					<linkerOutputDirectory>${project.parent.build.directory}</linkerOutputDirectory>
 
 				</configuration>
 
@@ -62,7 +60,6 @@
 						</goals>
 					</execution>
 				</executions>
-
 
 			</plugin>
 
