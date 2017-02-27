@@ -12,25 +12,35 @@ public class Application {
 
         int chipSelectPin = JPigpio.PI_SPI_CE0;
         int soPin = JPigpio.PI_SPI_MISO;
-
-        pigpio.gpioSetMode(chipSelectPin, JPigpio.PI_OUTPUT);
-        pigpio.gpioSetMode(soPin, JPigpio.PI_INPUT);
-
-        pigpio.gpioWrite(chipSelectPin, JPigpio.PI_HIGH);
-        pigpio.gpioWrite(chipSelectPin, JPigpio.PI_LOW);
-        while (pigpio.gpioRead(soPin) != JPigpio.PI_LOW) {
-            System.out.println("Waiting for so to go low");
-            pigpio.gpioDelay(500);
-        }
-
-        System.out.print("Reset complete");
+        //
+        // pigpio.gpioSetMode(chipSelectPin, JPigpio.PI_OUTPUT);
+        // pigpio.gpioSetMode(soPin, JPigpio.PI_INPUT);
+        //
+        // pigpio.gpioWrite(chipSelectPin, JPigpio.PI_HIGH);
+        // pigpio.gpioWrite(chipSelectPin, JPigpio.PI_LOW);
+        // while (pigpio.gpioRead(soPin) != JPigpio.PI_LOW) {
+        // System.out.println("Waiting for so to go low");
+        // pigpio.gpioDelay(500);
+        // }
+        //
+        // System.out.println("Reset complete");
         SPI spi = new SPI(pigpio, 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
 
-        System.out.print("After SPI Setup CE: "+pigpio.gpioGetMode(chipSelectPin));
-        System.out.print("After SPI Setup SO: "+pigpio.gpioGetMode(soPin));
+        System.out.println("After SPI Setup CE: " + pigpio.gpioGetMode(chipSelectPin));
+        System.out.println("After SPI Setup SO: " + pigpio.gpioGetMode(soPin));
 
-        byte[] txData = new byte[]{0x30};
-        byte[] rxData = new byte[2];
+        byte[] txData, rxData;
+
+        txData = new byte[] { 0x30 };
+        rxData = new byte[2];
+        spi.xfer(txData, rxData);
+
+        for (byte b : rxData) {
+            System.out.println(Integer.toHexString(b));
+        }
+
+        txData = new byte[] { 0x31 };
+        rxData = new byte[2];
         spi.xfer(txData, rxData);
 
         for (byte b : rxData) {
