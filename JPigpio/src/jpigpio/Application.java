@@ -16,7 +16,10 @@ public class Application {
         int chipSelectPin = JPigpio.PI_SPI_CE0;
         int soPin = JPigpio.PI_SPI_MISO;
 
-        // autoReset(chipSelectPin, soPin);
+        autoReset(chipSelectPin, soPin);
+        System.out.println("After AutoReset CE: " + pigpio.gpioGetMode(chipSelectPin));
+        System.out.println("After AutoReset SO: " + pigpio.gpioGetMode(soPin));
+
         spi = new SPI(pigpio, 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
         System.out.println("After SPI Setup CE: " + pigpio.gpioGetMode(chipSelectPin));
         System.out.println("After SPI Setup SO: " + pigpio.gpioGetMode(soPin));
