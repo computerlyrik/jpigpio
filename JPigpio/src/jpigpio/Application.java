@@ -20,7 +20,7 @@ public class Application {
         System.out.println("After AutoReset CE: " + pigpio.gpioGetMode(chipSelectPin));
         System.out.println("After AutoReset SO: " + pigpio.gpioGetMode(soPin));
 
-        spi = new SPI(pigpio, 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
+        spi = new SPI(new GPIO(pigpio, chipSelectPin), 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
         System.out.println("After SPI Setup CE: " + pigpio.gpioGetMode(chipSelectPin));
         System.out.println("After SPI Setup SO: " + pigpio.gpioGetMode(soPin));
 

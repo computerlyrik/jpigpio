@@ -9,9 +9,15 @@ public class SPI {
 	private int handle;
 	private final JPigpio pigpio;
 	private boolean debug;
-	private GPIO ce;
 
     private final int cePin;
+    private GPIO ce;
+
+    public SPI(GPIO ce, int channel, int baudRate, int flags) throws PigpioException {
+        this(ce.getPigpio(), channel, baudRate, flags);
+        this.ce = ce;
+
+    } // End of constructor
 
 	public SPI(JPigpio pigpio, int channel, int baudRate, int flags) throws PigpioException {
 		this.pigpio = pigpio;
