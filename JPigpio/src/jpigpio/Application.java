@@ -30,8 +30,16 @@ public class Application {
 
         byte[] txData, rxData;
 
+        txData = new byte[] { (byte) (0x30) };
+        rxData = new byte[2];
+        spi.xfer(txData, rxData);
+
+        for (byte b : rxData) {
+            System.out.println(Integer.toHexString(b));
+        }
+
         txData = new byte[] { (byte) (0xF0) };
-        rxData = new byte[1];
+        rxData = new byte[2];
         spi.xfer(txData, rxData);
 
         for (byte b : rxData) {
@@ -39,7 +47,7 @@ public class Application {
         }
 
         txData = new byte[] { (byte) (0xF1) };
-        rxData = new byte[1];
+        rxData = new byte[2];
         spi.xfer(txData, rxData);
 
         for (byte b : rxData) {
