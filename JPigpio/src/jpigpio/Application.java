@@ -10,17 +10,20 @@ public class Application {
     public static void main(String[] args) throws PigpioException {
 
         pigpio = new Pigpio();
-
+        pigpio.setDebug(true);
         pigpio.gpioInitialize();
 
         int chipSelectPin = JPigpio.PI_SPI_CE0;
         int soPin = JPigpio.PI_SPI_MISO;
 
-        autoReset(chipSelectPin, soPin);
+        System.out.println("Startup CE: " + pigpio.gpioGetMode(chipSelectPin));
+        System.out.println("Startup SO: " + pigpio.gpioGetMode(soPin));
+
+        // autoReset(chipSelectPin, soPin);
         System.out.println("After AutoReset CE: " + pigpio.gpioGetMode(chipSelectPin));
         System.out.println("After AutoReset SO: " + pigpio.gpioGetMode(soPin));
 
-        spi = new SPI(new GPIO(pigpio, chipSelectPin), 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
+        spi = new SPI(pigpio, 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
         System.out.println("After SPI Setup CE: " + pigpio.gpioGetMode(chipSelectPin));
         System.out.println("After SPI Setup SO: " + pigpio.gpioGetMode(soPin));
 
@@ -38,7 +41,7 @@ public class Application {
             System.out.println(Integer.toHexString(b));
         }
 
-        txData = new byte[] { (byte) (0xF0) };
+        txData = new byte[] { (byte) 0xF0 };
         rxData = new byte[2];
         spi.xfer(txData, rxData);
 
