@@ -37,10 +37,6 @@ public class Application {
             System.out.println(Integer.toHexString(b));
         }
 
-
-        {
-            if (pigpio.gpioGetMode(soPin) != JPigpio.PI_INPUT) {
-
         pigpio.gpioTerminate();
 
     }
