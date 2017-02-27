@@ -18,10 +18,12 @@ public class Application {
 
         autoReset(chipSelectPin, soPin);
         spi = new SPI(pigpio, 0, JPigpio.PI_SPI_BAUD_8MHZ, 0);
-        manualReset(chipSelectPin, soPin, JPigpio.PI_SPI_MOSI, JPigpio.PI_SPI_SCLK);
-
         System.out.println("After SPI Setup CE: " + pigpio.gpioGetMode(chipSelectPin));
         System.out.println("After SPI Setup SO: " + pigpio.gpioGetMode(soPin));
+
+        manualReset(chipSelectPin, soPin, JPigpio.PI_SPI_MOSI, JPigpio.PI_SPI_SCLK);
+        System.out.println("After ManualReset CE: " + pigpio.gpioGetMode(chipSelectPin));
+        System.out.println("After ManuaReset SO: " + pigpio.gpioGetMode(soPin));
 
         byte[] txData, rxData;
 
