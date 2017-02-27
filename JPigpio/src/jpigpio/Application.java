@@ -90,6 +90,8 @@ public class Application {
             pigpio.gpioDelay(500);
         }
 
+        /* 5 */
+        spi.resetPinState();
         byte[] txData, rxData;
 
         txData = new byte[] { 0x30 };
@@ -101,10 +103,13 @@ public class Application {
             System.out.println(Integer.toHexString(b));
         }
 
+        /* 5 */
+        pigpio.gpioSetMode(soPin, JPigpio.PI_INPUT);
         while (pigpio.gpioRead(soPin) != JPigpio.PI_LOW) {
             System.out.println("Waiting for so to go low");
             pigpio.gpioDelay(500);
         }
+        spi.resetPinState();
         System.out.println("Manual Reset complete");
     }
 

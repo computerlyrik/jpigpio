@@ -11,17 +11,22 @@ public class SPI {
 	private boolean debug;
 	private GPIO ce;
 
-    public SPI(GPIO ce, int channel, int baudRate, int flags) throws PigpioException {
-        this(ce.getPigpio(), channel, baudRate, flags);
-        this.ce = ce;
-    }
+    private final int cePin;
 
 	public SPI(JPigpio pigpio, int channel, int baudRate, int flags) throws PigpioException {
 		this.pigpio = pigpio;
 		this.debug = false;
 		handle = pigpio.spiOpen(channel, baudRate, flags);
+        cePin = JPigpio.PI_SPI_CE0 + channel;
+
 	} // End of constructor
 
+    public void resetPinState() throws PigpioException {
+        pigpio.gpioSetMode(cePin, JPigpio.PI_ALT0);
+        pigpio.gpioSetMode(JPigpio.PI_SPI_MISO, JPigpio.PI_ALT0);
+        pigpio.gpioSetMode(JPigpio.PI_SPI_MOSI, JPigpio.PI_ALT0);
+        pigpio.gpioSetMode(JPigpio.PI_SPI_SCLK, JPigpio.PI_ALT0);
+    }
 	public void close() throws PigpioException {
 		pigpio.spiClose(handle);
 	} // End of close
